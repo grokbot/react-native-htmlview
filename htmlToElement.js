@@ -5,6 +5,7 @@ var entities = require('./vendor/entities')
 
 var {
   Text,
+  View,
 } = ReactNative
 
 
@@ -35,17 +36,73 @@ function htmlToElement(rawHtml, opts, done) {
         if (node.name == 'a' && node.attribs && node.attribs.href) {
           linkPressHandler = () => opts.linkHandler(entities.decodeHTML(node.attribs.href))
         }
-
-        return (
-          <Text key={index} onPress={linkPressHandler}>
-            {node.name == 'pre' ? LINE_BREAK : null}
-            {node.name == 'li' ? BULLET : null}
-            {domToElement(node.children, node)}
-            {node.name == 'br' || node.name == 'li' ? LINE_BREAK : null}
-            {node.name == 'p' && index < list.length - 1 ? PARAGRAPH_BREAK : null}
-            {node.name == 'h1' || node.name == 'h2' || node.name == 'h3' || node.name == 'h4' || node.name == 'h5' ? LINE_BREAK : null}
-          </Text>
-        )
+        switch(node.name){
+    			case 'pre':
+    				return (
+    					<View style={opts.styles.preBox} key={index}>
+    						{domToElement(node.children, node)}
+    					</View>
+    				)
+    			case 'ul':
+    				return (
+    					<View style={opts.styles.ulBox} key={index}>
+    						{domToElement(node.children, node)}
+    					</View>
+    				)
+    			case 'li':
+    				return (
+    					<View style={opts.styles.liBox} key={index}>
+    					  <View style={opts.styles.bulletBox}>
+    							<Text style={opts.styles.bullet}>{BULLET}</Text>
+    						</View>
+    						<View style={opts.styles.bulletContent}>
+    						{domToElement(node.children, node)}
+    						</View>
+    					</View>
+    				)
+    			case 'p':
+    			  return (
+    					<View style={opts.styles.pBox} key={index}>
+    						{domToElement(node.children, node)}
+    					</View>
+    				)
+    			case 'br':
+    			  return (
+    					<Text key={index}>{LINE_BREAK}</Text>
+    				)
+    			case 'h1':
+            return (
+              <View style={opts.styles.h1Box} key={index}>
+                {domToElement(node.children, node)}
+              </View>
+            )
+    			case 'h2':
+            return (
+              <View style={opts.styles.h2Box} key={index}>
+                {domToElement(node.children, node)}
+              </View>
+            )
+    			case 'h3':
+            return (
+              <View style={opts.styles.h3Box} key={index}>
+                {domToElement(node.children, node)}
+              </View>
+            )
+    			case 'h4':
+            return (
+              <View style={opts.styles.h4Box} key={index}>
+                {domToElement(node.children, node)}
+              </View>
+            )
+    			case 'h5':
+    			  return (
+    					<View style={opts.styles.h5Box} key={index}>
+    						{domToElement(node.children, node)}
+    					</View>
+    				)
+    			default:
+    				return (<Text key={index} style={parent ? opts.styles[parent.name] : opts.styles.htmlText}>{HTMLRenderer(node.children, index, list)}</Text>);
+    		}
       }
     })
   }
