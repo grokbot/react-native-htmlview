@@ -101,7 +101,7 @@ function htmlToElement(rawHtml, opts, done) {
     					</View>
     				)
     			default:
-    				return (<Text key={index} style={parent ? opts.styles[parent.name] : opts.styles.htmlText}>{HTMLRenderer(node.children, index, list)}</Text>);
+    				return (<Text key={index} style={parent ? opts.styles[parent.name] : opts.styles.htmlText}>{domToElement(node.children, node)}</Text>);
     		}
       }
     })
