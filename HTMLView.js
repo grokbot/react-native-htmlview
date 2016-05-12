@@ -4,7 +4,7 @@ var htmlToElement = require('./htmlToElement')
 var {
   Linking,
   StyleSheet,
-  Text,
+  View,
 } = ReactNative
 
 
