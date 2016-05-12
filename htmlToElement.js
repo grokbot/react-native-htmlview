@@ -100,6 +100,39 @@ function htmlToElement(rawHtml, opts, done) {
     						{domToElement(node.children, node)}
     					</View>
     				)
+          case 'table':
+            return (
+              <View style={opts.styles.tableBox} key={index}>
+                {domToElement(node.children, node)}
+              </View>
+            )
+          case 'thead':
+          case 'tbody':
+            return (
+              <View style={opts.styles.tableBox} key={index}>
+                {domToElement(node.children, node)}
+              </View>
+            )
+          case 'colgroup':
+          case 'tr':
+            return (
+              <View style={opts.styles.trBox} key={index}>
+                {domToElement(node.children, node)}
+              </View>
+            )
+          case 'th':
+            return (
+              <View style={opts.styles.thBox} key={index}>
+                {domToElement(node.children, node)}
+              </View>
+            )
+          case 'col':
+          case 'td':
+            return (
+              <View style={opts.styles.tdBox} key={index}>
+                {domToElement(node.children, node)}
+              </View>
+            )
     			default:
     				return (<Text key={index} style={parent ? opts.styles[parent.name] : opts.styles.htmlText}>{domToElement(node.children, node)}</Text>);
     		}

@@ -48,5 +48,10 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/jsdf/react-native-htmlview.git"
+  },
+  "dependencies": {
+    "babel-eslint": "^6.0.2",
+    "eslint": "^2.7.0",
+    "eslint-plugin-react": "^4.3.0"
   }
 }
