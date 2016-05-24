@@ -49,6 +49,12 @@ function htmlToElement(rawHtml, opts, done) {
     						{domToElement(node.children, node)}
     					</View>
     				)
+          case 'ol':
+    				return (
+    					<View style={opts.styles.ulBox} key={index}>
+    						{domToElement(node.children, node)}
+    					</View>
+    				)
     			case 'li':
     				return (
     					<View style={opts.styles.liBox} key={index}>
@@ -56,14 +62,14 @@ function htmlToElement(rawHtml, opts, done) {
     							<Text style={opts.styles.bullet}>{BULLET}</Text>
     						</View>
     						<View style={opts.styles.bulletContent}>
-    						{domToElement(node.children, node)}
+    						  {domToElement(node.children, node)}
     						</View>
     					</View>
     				)
     			case 'p':
     			  return (
     					<View style={opts.styles.pBox} key={index}>
-    						{domToElement(node.children, node)}
+    						<Text>{domToElement(node.children, node)}</Text>
     					</View>
     				)
     			case 'br':
