@@ -43,6 +43,12 @@ function htmlToElement(rawHtml, opts, done) {
     						{domToElement(node.children, node)}
     					</View>
     				)
+          case 'blockquote':
+    				return (
+    					<View style={opts.styles.blockquoteBox} key={index}>
+    						{domToElement(node.children, node)}
+    					</View>
+    				)
     			case 'ul':
     				return (
     					<View style={opts.styles.ulBox} key={index}>
