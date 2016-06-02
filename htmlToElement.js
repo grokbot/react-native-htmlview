@@ -145,6 +145,10 @@ function htmlToElement(rawHtml, opts, done) {
                 {domToElement(node.children, node)}
               </View>
             )
+          case 'a':
+            return (
+              <Text key={index} style={opts.styles.a} onPress={linkPressHandler}>{domToElement(node.children, node)}</Text>
+            )
     			default:
     				return (<Text key={index} style={parent ? opts.styles[parent.name] : opts.styles.htmlText}>{domToElement(node.children, node)}</Text>);
     		}
